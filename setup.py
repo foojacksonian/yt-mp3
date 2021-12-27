@@ -19,6 +19,7 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.7'
     ],
+    python_requires='>=3.7',
     keywords='music,mp3,YouTube',
     packages=find_packages(),
     scripts=['ytmp3.py'],

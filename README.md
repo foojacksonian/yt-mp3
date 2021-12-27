@@ -5,6 +5,17 @@ The program relies on [pytube](https://github.com/pytube/pytube),
 a modern [ffmpeg](https://ffmpeg.org/), and [mutagen](https://mutagen.readthedocs.io/en/latest/#)
 to work.
 
+### Installation
+
+Currently, the simplest way to install the uiltity is to download a release from GitHub and:
+
+```
+$ pip3 install .
+```
+
+from within the unpacked package. Pip will attempt to install the python dependencies.
+Note, ffmpeg must be installed and in the users path before using ytmp3.
+
 
 ### Usage
 
