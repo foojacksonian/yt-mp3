@@ -60,13 +60,15 @@ def get_audio_data(url, output_dir):
 #get_audio_data
 
 
-def convert(fpath, start=None):
+def convert(fpath, start=None, gain=None):
     """Routine converts the audio data in fpath, usually mp4, to mp3.
 
        :param fpath: The input audio file to convert.
        :type fpath: Path Object
        :param start: The start offset, in seconds
        :type start: int
+       :param gain: A gain value, in decibels (dB)
+       :type gain: int
        :returns:
             The path to the saved mp3 audio file
        :rtype: Path object
@@ -85,7 +87,10 @@ def convert(fpath, start=None):
     cmd = ['ffmpeg']
     if start is not None:
         cmd.extend(['-ss', str(start)])
-    cmd.extend(['-i', str(fpath), '-vn', '-q:a', '0', '-y', '-acodec', 'mp3', m3_name])
+    cmd.extend(['-i', str(fpath), '-vn', '-q:a', '0', '-y', '-acodec', 'mp3'])
+    if gain is not None:
+        cmd.extend(['-af', "volume=%ddB" % gain])
+    cmd.append(m3_name)
     logging.debug("Converting via %s", " ".join(cmd))
     try:
         run_out = subprocess.run(cmd, capture_output=True, text=True, check=True)
@@ -128,7 +133,7 @@ def id3_update(fpath, song=None, artist=None, album=None, year=None):
 
 def main():
     """The main entry point."""
-    parser = argparse.ArgumentParser(description='Trims and cleans up mp3 files')
+    parser = argparse.ArgumentParser(description='Downloads, trims, encodes and tags songs from YouTube.')
     parser.add_argument('-s', default=0, type=int, help='Start time (second) of song')
     parser.add_argument('--verbose', '-v', default=False, action='store_true', \
                         help='Run in verbose mode')
@@ -139,6 +144,7 @@ def main():
     parser.add_argument('--odir', default='.', type=str, help='The output directory')
     parser.add_argument('--clean', default=False, action='store_true', help='Clean up'+\
                         ' the downloaded intermediate file')
+    parser.add_argument('--gain', default=None, type=int, help='Apply audio gain (units are dB)')
     parser.add_argument('uri', type=str, nargs=1, help='The path or YouTube URL of the song')
     args = parser.parse_args()
 
@@ -151,6 +157,7 @@ def main():
     logging.debug("ID3 metadata song \"%s\"", str(args.song))
     logging.debug("ID3 metadata artist \"%s\"", str(args.artist))
     logging.debug("ID3 metadata album \"%s\"", str(args.album))
+    logging.debug("Gain %ddB", args.gain)
     logging.debug("Output Directory \"%s\"", str(args.odir))
 
     if args.odir != '.' and not os.path.exists(args.odir):
@@ -167,12 +174,13 @@ def main():
     else:
         soffset = None
 
-    song_path = convert(path, soffset)
+    song_path = convert(path, soffset, args.gain)
 
     # tag the output
     id3_update(song_path, song=args.song, artist=args.artist, album=args.album, year=args.year)
 
     if args.clean:
+        logging.debug("Cleaning %s ...", path)
         os.unlink(path)
 #main
 
