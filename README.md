@@ -7,19 +7,22 @@ to work.
 
 ### Installation
 
-Currently, the simplest way to install the uiltity is to download a release from GitHub and:
+Currently, the simplest way to install the uiltity is to download a
+[release from GitHub](https://github.com/foojacksonian/yt-mp3/releases) and:
 
 ```
+$ tar xzvf yt-mp3-0.1.0.tar.gz
+$ cd yt-mp3-0.1.0
 $ pip3 install .
 ```
 
 from within the unpacked package. Pip will attempt to install the python dependencies.
-Note, ffmpeg must be installed and in the users path before using ytmp3.
+Note, ffmpeg must be installed and in the user's path before using ytmp3.
 
 
 ### Usage
 
-See the help message for more detailed invocation details:
+See the help message for more invocation details:
 
 ```
 $ ytmp3.py -h

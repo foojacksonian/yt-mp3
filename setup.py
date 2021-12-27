@@ -6,7 +6,7 @@ long_description = "The ytmp3 program downloads, trims, encodes and tags songs a
 
 setup(
     name='yt-mp3',
-    version='0.0.1',
+    version='0.1.0',
     description='Simple program to download, trim, encode and tag songs from Youtube.',
     long_description=long_description,
     url='https://github.com/foojacksonian/yt-mp3',

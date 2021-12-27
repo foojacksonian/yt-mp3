@@ -26,16 +26,16 @@ from mutagen.easyid3 import EasyID3
 
 
 def get_audio_data(url, output_dir):
-    """Routine attemps to get the 'best' audio from the url and downloads it.
+    """Routine attempts to retrieve the 'best' audio from the YT url.
 
-       :param url: The YT url of interestk
+       :param url: The YT url of interest.
        :param output_dir: The staging directory for the audio data.
        :returns:
-            The path to the saved audio file
+            The path to the saved audio file.
        :rtype: Path object
     """
     renum = re.compile(r'^(\d+)')
-    # Get target stream, find max bits/sec
+    # Get the target stream, find max bits/sec
     try:
         yt_obj= YouTube(url)
         strms = yt_obj.streams.filter(only_audio=True, file_extension='mp4')
@@ -64,12 +64,12 @@ def convert(fpath, start=None, gain=None):
 
        :param fpath: The input audio file to convert.
        :type fpath: Path Object
-       :param start: The start offset, in seconds
+       :param start: The start offset, in seconds.
        :type start: int
-       :param gain: A gain value, in decibels (dB)
+       :param gain: A gain value, in decibels (dB).
        :type gain: int
        :returns:
-            The path to the saved mp3 audio file
+            The path to the saved mp3 audio file.
        :rtype: Path object
     """
     # Clean up file name
@@ -102,15 +102,15 @@ def convert(fpath, start=None, gain=None):
 
 
 def id3_update(fpath, song=None, artist=None, album=None, year=None):
-    """Routine updates the ID3 mp3 metadata.
+    """Routine updates the ID3 mp3 metadata tags.
 
-       :param song: The title
+       :param song: The song's title.
        :type song: str
-       :param artist: The artist
+       :param artist: The song's artist.
        :type artist: str
-       :param album: The album
+       :param album: The song's album.
        :type album: str
-       :param year: The year. Must be YYYY
+       :param year: The year. Must be YYYY format, i.e. regex (\d{4}$)
        :type year: str
     """
     au_file = EasyID3(fpath)
@@ -131,7 +131,7 @@ def id3_update(fpath, song=None, artist=None, album=None, year=None):
 
 
 def main():
-    """The main entry point."""
+    """Program main entry point"""
     parser = argparse.ArgumentParser(description='Downloads, trims, encodes and tags songs from YouTube.')
     parser.add_argument('-s', default=0, type=int, help='Start time (second) of song')
     parser.add_argument('--verbose', '-v', default=False, action='store_true', \
@@ -151,7 +151,7 @@ def main():
         logr = logging.getLogger()
         logr.setLevel(logging.DEBUG)
 
-    logging.debug("YT URI %s", args.uri[0])
+    logging.debug("YouTube URL %s", args.uri[0])
     logging.debug("Start time %d", args.s)
     logging.debug("ID3 metadata song \"%s\"", str(args.song))
     logging.debug("ID3 metadata artist \"%s\"", str(args.artist))
@@ -165,7 +165,7 @@ def main():
     # get data
     path = get_audio_data(args.uri[0], args.odir)
     if path is None:
-        logging.error("Unable to retrive required data from URL %s", args.uri[0])
+        logging.error("Unable to retrieve required data from URL %s", args.uri[0])
         sys.exit(1)
 
     if args.s != 0:
