@@ -137,10 +137,9 @@ def main():
     parser.add_argument('--album', default=None, type=str, help='Album ID3 metadata name')
     parser.add_argument('--year', default=None, type=str, help='Year ID3 metadata tag')
     parser.add_argument('--odir', default='.', type=str, help='The output directory')
-    parser.add_argument('--clean', default=False, type=bool, help='Clean up the downloaded '+\
-                        ' intermediate file')
+    parser.add_argument('--clean', default=False, action='store_true', help='Clean up'+\
+                        ' the downloaded intermediate file')
     parser.add_argument('uri', type=str, nargs=1, help='The path or YouTube URL of the song')
-    parser.add_argument('out', type=str, nargs='?', help='The output path')
     args = parser.parse_args()
 
     if args.verbose is True:
@@ -170,6 +169,9 @@ def main():
 
     # tag the output
     id3_update(song_path, song=args.song, artist=args.artist, album=args.album, year=args.year)
+
+    if args.clean:
+        os.unlink(path)
 #main
 
 
