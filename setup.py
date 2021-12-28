@@ -17,8 +17,9 @@ setup(
         'Development Status :: 4 - Beta',
         'Topic :: Multimedia :: Sound/Audio',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6'
-        'Programming Language :: Python :: 3.7'
+        'Operating System :: MacOS',
+        'Operating System :: POSIX :: Linux',
+        'License :: OSI Approved :: Apache Software License'
     ],
     python_requires='>=3.6',
     keywords='music,mp3,YouTube',
