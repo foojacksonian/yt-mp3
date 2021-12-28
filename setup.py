@@ -6,7 +6,7 @@ long_description = "The ytmp3 program downloads, trims, encodes and tags songs a
 
 setup(
     name='yt-mp3',
-    version='0.1.0',
+    version='0.1.1',
     description='Simple program to download, trim, encode and tag songs from Youtube.',
     long_description=long_description,
     url='https://github.com/foojacksonian/yt-mp3',
@@ -17,9 +17,10 @@ setup(
         'Development Status :: 4 - Beta',
         'Topic :: Multimedia :: Sound/Audio',
         'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.6'
         'Programming Language :: Python :: 3.7'
     ],
-    python_requires='>=3.7',
+    python_requires='>=3.6',
     keywords='music,mp3,YouTube',
     packages=find_packages(),
     scripts=['ytmp3.py'],

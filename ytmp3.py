@@ -1,3 +1,4 @@
+#!env python3
 """
  Copyright 2021 Foo Jacksonian, Andrew Michaelis
 
