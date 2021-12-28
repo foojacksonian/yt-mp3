@@ -157,7 +157,7 @@ def main():
     logging.debug("ID3 metadata song \"%s\"", str(args.song))
     logging.debug("ID3 metadata artist \"%s\"", str(args.artist))
     logging.debug("ID3 metadata album \"%s\"", str(args.album))
-    logging.debug("Gain %ddB", args.gain)
+    logging.debug("Gain %s dB", str(args.gain))
     logging.debug("Output Directory \"%s\"", str(args.odir))
 
     if args.odir != '.' and not os.path.exists(args.odir):
