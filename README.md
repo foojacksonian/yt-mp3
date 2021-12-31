@@ -11,8 +11,8 @@ Currently, the simplest way to install the uiltity is to download a
 [release from GitHub](https://github.com/foojacksonian/yt-mp3/releases) and:
 
 ```
-$ tar xzvf yt-mp3-0.1.1.tar.gz
-$ cd yt-mp3-0.1.1
+$ tar xzvf yt-mp3-0.1.2.tar.gz
+$ cd yt-mp3-0.1.2
 $ pip3 install .
 ```
 
